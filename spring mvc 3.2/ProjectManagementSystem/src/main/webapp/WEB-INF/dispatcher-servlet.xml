@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       
+ xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+        3)
+
+        <context:annotation-config> declares support for general annotations such as @Required, @Autowired, @PostConstruct, and so on.
+
+        <mvc:annotation-driven /> declares explicit support for annotation-driven MVC controllers (i.e. @RequestMapping, @Controller, although support for those is the default behaviour), as well as adding support for declrative validation via @Valid and message body marshalling with @RequestBody/ResponseBody.
+
+    -->
+    <mvc:annotation-driven/>
+    <context:annotation-config/>
+ 
+    <!-- 1 ) jdbc connectivity file properties file-->
+    <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
+    <!--2) jdbc connectivity-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/> 
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/> 
+    </bean>
+    <!--
+        4) database model lai scan garne
+    -->
+    <bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>np.com.drose.studentmanagementsystem.model</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.jdbc.use_get_generated_keys">true</prop>
+                <prop key="hibernate.connection.isolation">2</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!--
+        5)transaction manager setting
+        Configuring TransactionManager Bean
+
+        The following declaration is for automatic transaction support for the SessionFactory:
+    -->
+<!--    <tx:annotation-driven>
+         Enable the configuration of transactional behavior based on annotations 
+    -->
+    <!--</tx:annotation-driven>-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean> 
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+        
+    <!--
+        6)
+       For including css 
+    -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <!--
+               7)Component scanning with <context:component-scan base-package="com.mycompany.maventestwebapp" /> is telling spring that it should search the class path for all the classes under com.mycompany.maventestweapp and look at each class to see if it has a @Controller, or @Repository, or @Service, or @Component and if it does then Spring will register the class with the bean factory as if you had typed <bean class="..." /> in the xml configuration files. 
+    -->
+    <context:component-scan base-package="np.com.drose.studentmanagementsystem"/>
+         
+    <!--
+    8) view resolver by tile
+    -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView">           
+        </property>
+        <property name="order" value="0" />  
+    </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+ 
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean> 
+         
+    <bean id="employeeServicesImpl" class="np.com.drose.studentmanagementsystem.services.impl.EmployeeServicesImpl" />  
+    <bean id="projectServicesImpl" class="np.com.drose.studentmanagementsystem.services.impl.ProjectServicesImpl" />
+    <bean id="teamServicesImpl" class="np.com.drose.studentmanagementsystem.services.impl.TeamServicesImpl" />
+    <bean id="userServicesImpl" class="np.com.drose.studentmanagementsystem.services.impl.UserServicesImpl" />
+    <bean id="myUserDetailsService" class="np.com.drose.studentmanagementsystem.services.impl.MyUserDetailsService" />
+    <bean id="roleServicesImpl" class="np.com.drose.studentmanagementsystem.services.impl.RoleServicesImpl" />
+    
+     <bean id="employeeDAOImpl" class="np.com.drose.studentmanagementsystem.dao.impl.EmployeeDAOImpl" />  
+    <bean id="projectDAOImpl" class="np.com.drose.studentmanagementsystem.dao.impl.ProjectDAOImpl" />
+    <bean id="teamDAOImpl" class="np.com.drose.studentmanagementsystem.dao.impl.TeamDAOImpl" />
+    <bean id="userDAOImpl" class="np.com.drose.studentmanagementsystem.dao.impl.UserDAOImpl" />
+    <bean id="roleDAOImpl" class="np.com.drose.studentmanagementsystem.dao.impl.RoleDAOImpl" />
+
+
+
+       
+</beans>

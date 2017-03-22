@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="base.definitions" template="/WEB-INF/page/layout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/page/include/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/page/include/menu.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/page/include/footer.jsp"/>
+    </definition>
+    
+    <definition name="login" template="/WEB-INF/page/loginlayout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/page/include/footer.jsp"/>
+    </definition>
+        
+    <definition name="/admin/project/addProject" extends="base.definitions">
+        <put-attribute name="title" value="Add Project Details"/>
+        <put-attribute name="body" value="/WEB-INF/page/task/addProject.jsp"/>
+    </definition>
+    
+    <definition name="/both/project/list" extends="base.definitions">
+        <put-attribute name="title" value="List of Project"/>
+        <put-attribute name="body" value="/WEB-INF/page/task/list.jsp"/>
+    </definition>
+  
+    <definition name="/admin/project/edit" extends="base.definitions">
+        <put-attribute name="title" value="Edit the Project"/>
+        <put-attribute name="body" value="/WEB-INF/page/task/edit.jsp"/>
+    </definition>
+    
+    <definition name="/admin/member/addmember" extends="base.definitions">
+        <put-attribute name="title" value="Add A Member For A Team"/>
+        <put-attribute name="body" value="/WEB-INF/page/team/add.jsp"/>
+    </definition>
+    
+    <definition name="/admin/member/list" extends="base.definitions">
+        <put-attribute name="title" value="List"/>
+        <put-attribute name="body" value="/WEB-INF/page/team/list.jsp"/>
+    </definition>
+    
+    <definition name="/admin/employee/addemployee" extends="base.definitions">
+        <put-attribute name="title" value="Add A NEW EMPLOYEE"/>
+        <put-attribute name="body" value="/WEB-INF/page/employee/add.jsp"/>
+    </definition>
+    
+    <definition name="/admin/employee/list" extends="base.definitions">
+        <put-attribute name="title" value="List"/>
+        <put-attribute name="body" value="/WEB-INF/page/employee/list.jsp"/>
+    </definition>
+    
+    <definition name="/admin/employee/edit" extends="base.definitions">
+        <put-attribute name="title" value="Edit"/>
+        <put-attribute name="body" value="/WEB-INF/page/employee/edit.jsp"/>
+    </definition>
+    
+    
+    <definition name="/user/add" extends="login">
+        <put-attribute name="title" value="Add A User"/>
+        <put-attribute name="body" value="/WEB-INF/page/user/adduser.jsp"/>
+    </definition>
+
+    
+    <definition name="/login" extends="login">
+        <put-attribute name="title" value="Login"/>
+        <put-attribute name="body" value="/WEB-INF/page/login/login.jsp"/>
+    </definition>
+    
+    
+</tiles-definitions>

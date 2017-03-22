@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="base.definitions" template="/WEB-INF/page/layout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/page/include/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/page/include/sidebar.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/page/include/footer.jsp"/>
+    </definition>
+    
+        
+    <definition name="/home" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : A Place for Health Smart"/>
+        <put-attribute name="body" value="/WEB-INF/page/home/home.jsp"/>
+    </definition>
+    <definition name="/register" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : A Place for Health Smart"/>
+        <put-attribute name="body" value="/WEB-INF/page/user/add.jsp"/>
+    </definition>
+    <definition name="/user/list" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : A Place for Health Smart"/>
+        <put-attribute name="body" value="/WEB-INF/page/user/list.jsp"/>
+    </definition>
+    <definition name="/user/edit" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : A Place for Health Smart"/>
+        <put-attribute name="body" value="/WEB-INF/page/user/edit.jsp"/>
+    </definition>
+    
+    <definition name="/role/add" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : Add role"/>
+        <put-attribute name="body" value="/WEB-INF/page/role/add.jsp"/>
+    </definition>
+    <definition name="/role/list" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of Role"/>
+        <put-attribute name="body" value="/WEB-INF/page/role/list.jsp"/>
+    </definition>
+    <definition name="/role/edit" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of Role"/>
+        <put-attribute name="body" value="/WEB-INF/page/role/edit.jsp"/>
+    </definition>
+    <definition name="/group/add" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : Add group"/>
+        <put-attribute name="body" value="/WEB-INF/page/group/add.jsp"/>
+    </definition>
+    <definition name="/group/list" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of group"/>
+        <put-attribute name="body" value="/WEB-INF/page/group/list.jsp"/>
+    </definition>
+    <definition name="/group/edit" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of group"/>
+        <put-attribute name="body" value="/WEB-INF/page/group/edit.jsp"/>
+    </definition>
+    
+    <definition name="/doctor/add" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : Add Doctor"/>
+        <put-attribute name="body" value="/WEB-INF/page/doctor/add.jsp"/>
+    </definition>
+    <definition name="/doctor/list" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of Doctor"/>
+        <put-attribute name="body" value="/WEB-INF/page/doctor/list.jsp"/>
+    </definition>
+    <definition name="/doctor/edit" extends="base.definitions">
+        <put-attribute name="title" value="E-Health : List of Doctor"/>
+        <put-attribute name="body" value="/WEB-INF/page/doctor/edit.jsp"/>
+    </definition>
+    
+
+    
+</tiles-definitions>

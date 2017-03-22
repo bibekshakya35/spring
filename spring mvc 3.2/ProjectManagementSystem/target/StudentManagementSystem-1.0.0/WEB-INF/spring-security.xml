@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                            http://www.springframework.org/schema/security 
+                            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <global-method-security pre-post-annotations="enabled" />
+    
+
+
+    <!--Needd to use use-expression for Role Defination-->
+       <http use-expressions="true">
+        <intercept-url pattern="/headers/" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/roger/" access="hasRole('ROLE_USER','ROLE_ADMIN')" />
+       
+        <form-login 
+            login-page="/login" 
+            default-target-url="/project/list"
+            authentication-failure-url="/error" 
+            username-parameter="username"
+            password-parameter="password" />
+        <logout logout-success-url="/logout" />
+	
+        <logout logout-url="/logout" />
+    </http>
+
+	    <authentication-manager>
+
+	        <authentication-provider user-service-ref="myUserDetailsService">
+
+	            <password-encoder hash="sha">
+
+	        </password-encoder></authentication-provider>
+
+	    </authentication-manager>
+</beans:beans>
